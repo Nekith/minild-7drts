@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<!-- NMML reference: https://gist.github.com/1763850 -->
+	
+	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
+	<meta title="Simple Side Scrolling Strategy" package="com.nekith.minild7drts" version="0.1.0" company="Errant Works" />
+	
+	<!-- output -->
+	<app main="Main" file="SimpleSideScrollingStrategy" path="bin" />
+	
+	<window background="#000000" fps="60" />
+	<window width="1000" height="600" unless="mobile" />
+	<window orientation="landscape" vsync="true" antialiasing="0" if="cpp" />
+	
+	<!-- classpath, haxe libs -->
+	<source path="src" />
+	<haxelib name="nme" />
+    <haxelib name="HaxePunk" />
+	
+	<!-- assets -->
+	<icon path="assets/nme.svg" />
+    <assets path="assets/graphics" rename="gfx" include="*.png|*.jpg" />
+    <assets path="assets/audio" rename="sfx" include="*.mp3" if="flash" />
+    <assets path="assets/audio" rename="sfx" include="*.wav|*.ogg" unless="flash" />
+    <assets path="assets/font" rename="font" include="*.ttf" />
+	
+	<!-- DLLs -->
+	<ndll name="std" />
+	<ndll name="regexp" />
+	<ndll name="zlib" />
+	<ndll name="nme" haxelib="nme" />
+
+	<!-- optimize JS output -->
+	<haxeflag name="--dead-code-elimination" if="html5" />
+	<haxeflag name="--js-modern" if="html5" />
+	
+</project>
