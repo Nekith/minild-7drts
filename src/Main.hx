@@ -1,23 +1,19 @@
 package ;
 
-import com.haxepunk.Engine;
-import com.haxepunk.HXP;
+import nme.display.Sprite;
+import nme.events.Event;
+import nme.Lib;
 import UserInterface;
 import scenes.FirstLevel;
 
-class Main extends Engine 
+class Main extends Sprite 
 {
-    public override function init() : Void
-    {
-#if debug
-        HXP.console.enable();
-#end
-        HXP.scene = new FirstLevel();
-        addChild(new UserInterface());
-    }
-	
     static public function main()
     {
-        new Main();
+        var stage = Lib.current.stage;
+        stage.scaleMode = nme.display.StageScaleMode.NO_SCALE;
+        stage.align = nme.display.StageAlign.TOP_LEFT;
+        Lib.current.addChild(new FirstLevel());
+        Lib.current.addChild(new UserInterface());
     }
 }

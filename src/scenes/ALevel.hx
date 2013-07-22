@@ -1,8 +1,8 @@
 package scenes;
 
-import scenes.ALevel;
+import nme.display.Sprite;
 
-class FirstLevel extends ALevel
+class ALevel extends Sprite
 {
     public function new()
     {

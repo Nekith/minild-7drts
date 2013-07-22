@@ -17,7 +17,6 @@
   <classpaths>
     <class path="src" />
     <class path="E:\Haxe\haxe\lib\nme/4,0,2/" />
-    <class path="E:\Haxe\haxe\lib\HaxePunk/2,3,0/" />
     <class path="bin/flash/haxe" />
   </classpaths>
   <!-- Build options -->
@@ -31,7 +30,6 @@
   <!-- haxelib libraries -->
   <haxelib>
     <library name="nme" />
-    <library name="HaxePunk" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
