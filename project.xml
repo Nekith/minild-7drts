@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Minild7drts" package="com.nekith.minild7drts" version="1.0.0" company="Errant Works" />
+	<app main="Main" path="Export" file="Minild7drts" />
+    
+	<window background="#000000" fps="60" />
+	<window width="1000" height="600" unless="mobile" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+	<assets path="Assets" rename="assets" />
+	
+</project>

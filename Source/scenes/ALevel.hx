@@ -6,6 +6,7 @@ import flash.display.Shape;
 import flash.display.Graphics;
 import scenes.AScene;
 import entities.AEntity;
+import entities.Node;
 
 class ALevel extends AScene
 {
@@ -32,6 +33,18 @@ class ALevel extends AScene
     {
         this._entities.push(entity);
         addChild(entity);
+    }
+    
+    public function findNode(p : Point) : Node
+    {
+        for (e in this._entities) {
+            if (true == Std.is(e, Node)) {
+                if (15 > Math.sqrt(Math.pow(p.x - e.x, 2) + Math.pow(p.y - e.y, 2))) {
+                    return cast(e, Node);
+                }
+            }
+        }
+        return null;
     }
     
     public override function update() : AScene

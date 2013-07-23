@@ -52,6 +52,35 @@ class Node extends AEntity
         node.ways.push(this);
     }
     
+    public function getDirection(owner : Owner) : Point
+    {
+        var vx : Float = 0;
+        var vy : Float = 0;
+        if (Owner.PLAYER == owner) {
+            if (-1 != playerOrder) {
+                vx = ways[playerOrder].x;
+                vy = ways[playerOrder].y;
+            }
+        }
+        else {
+            if (-1 != enemyOrder) {
+                vx = ways[enemyOrder].x;
+                vy = ways[enemyOrder].y;
+            }
+        }
+        if (0 != vx && 0 != vy) {
+            if (vx >= vy) {
+                vy = vy / vx;
+                vx = 1;
+            }
+            else {
+                vx = vx / vy;
+                vy = 1;
+            }
+        }
+        return new Point(vx, vy);
+    }
+    
     public override function update() : Void
     {
         --this._changedAt;
