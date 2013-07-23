@@ -4,24 +4,24 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="application.nmml" />
+    <movie path="application.xml" />
     <movie fps="60" />
     <movie width="1000" />
     <movie height="600" />
-    <movie version="3" />
-    <movie minorVersion="0" />
-    <movie platform="NME" />
-    <movie background="000000" />
+    <movie version="11" />
+    <movie minorVersion="5" />
+    <movie platform="Flash Player" />
+    <movie background="#000000" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="E:\Haxe\haxe\lib\nme/4,0,2/" />
-    <class path="bin/flash/haxe" />
+    <class path="E:\Haxe\haxe\lib\openfl\1,0,4\" />
+    <class path="bin\flash\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="nme4=1&#xA;tools=1&#xA;nme_ver=4.0.2&#xA;nme&#xA;nme_install_tool=1&#xA;display&#xA;web" />
+    <option directives="openfl_ver=1.0.4&#xA;openfl&#xA;nme&#xA;display&#xA;web" />
     <option flashStrict="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
@@ -29,7 +29,7 @@
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <library name="nme" />
+    <library name="openfl" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
@@ -51,7 +51,7 @@
   <options>
     <option showHiddenPaths="False" />
     <option testMovie="Custom" />
-    <option testMovieCommand="" />
+    <option testMovieCommand="openfl test flash" />
   </options>
   <!-- Plugin storage -->
   <storage />

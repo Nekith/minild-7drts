@@ -1,11 +1,11 @@
 package ;
 
-import nme.Lib;
-import nme.display.Sprite;
-import nme.display.Shape;
-import nme.display.Graphics;
-import nme.ui.Mouse;
-import nme.events.MouseEvent;
+import flash.Lib;
+import flash.display.Sprite;
+import flash.display.Shape;
+import flash.display.Graphics;
+import flash.ui.Mouse;
+import flash.events.MouseEvent;
 
 class UserInterface extends Sprite
 {
@@ -27,7 +27,7 @@ class UserInterface extends Sprite
         g.beginFill(0x6AA84F);
         g.drawRect(5, -1, 7, 3);
         addChild(cursor);
-		var stage = Lib.current.stage;
+        var stage = Lib.current.stage;
         stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
     }
     
