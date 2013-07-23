@@ -18,13 +18,13 @@ class UserInterface extends Sprite
         cursor = new Shape();
         var g : Graphics = cursor.graphics;
         g.clear();
-        g.beginFill(0x6AA84F);
+        g.beginFill(0xDC143C);
         g.drawRect(-1, -12, 3, 7);
-        g.beginFill(0x6AA84F);
+        g.beginFill(0xDC143C);
         g.drawRect(-1, 5, 3, 7);
-        g.beginFill(0x6AA84F);
+        g.beginFill(0xDC143C);
         g.drawRect(-12, -1, 7, 3);
-        g.beginFill(0x6AA84F);
+        g.beginFill(0xDC143C);
         g.drawRect(5, -1, 7, 3);
         addChild(cursor);
         var stage = Lib.current.stage;

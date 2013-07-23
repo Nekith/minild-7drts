@@ -20,7 +20,6 @@ class AScene extends Sprite
     public var focus(default, null) : Bool;
     private var _currentTime : Float = 0;
     private var _accumulator : Float = 0;
-    private var _cursor : Shape;
     
     public function new()
     {
@@ -40,19 +39,6 @@ class AScene extends Sprite
         click = false;
         keys = [];
         focus = true;
-        Mouse.hide();
-        this._cursor = new Shape();
-        var g : Graphics = this._cursor.graphics;
-        g.clear();
-        g.beginFill(0x6AA84F);
-        g.drawRect(-1, -12, 3, 7);
-        g.beginFill(0x6AA84F);
-        g.drawRect(-1, 5, 3, 7);
-        g.beginFill(0x6AA84F);
-        g.drawRect(-12, -1, 7, 3);
-        g.beginFill(0x6AA84F);
-        g.drawRect(5, -1, 7, 3);
-        addChild(this._cursor);
     }
     
     public function onKeyDown(event : KeyboardEvent) : Void
@@ -93,7 +79,7 @@ class AScene extends Sprite
             var scene : AScene = update();
             if (scene != this) {
                 this.clean();
-                Lib.current.addChild(scene);
+                Lib.current.addChildAt(scene, 0);
                 return;
             }
             _accumulator -= 1 / 60.0;
@@ -118,9 +104,6 @@ class AScene extends Sprite
     
     public function draw() : Void
     {
-        this._cursor.x = mouse.x;
-        this._cursor.y = mouse.y;
-        setChildIndex(this._cursor, this.numChildren - 1);
     }
     
     public function clean() : Void
