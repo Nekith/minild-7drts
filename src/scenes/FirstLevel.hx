@@ -39,8 +39,8 @@ class FirstLevel extends ALevel
         // barrack C
         var barrackC : Barrack = new Barrack(this, new Point(850, 550));
         addEntity(barrackC);
-        var nodebarrackC : Node = new Node(this, new Point(795, 550), barrackC);
-        addEntity(nodebarrackC);
+        var nodeBarrackC : Node = new Node(this, new Point(795, 550), barrackC);
+        addEntity(nodeBarrackC);
         // barrack D
         var barrackD : Barrack = new Barrack(this, new Point(850, 200));
         addEntity(barrackD);
@@ -48,5 +48,13 @@ class FirstLevel extends ALevel
         addEntity(nodeBarrackD);
         // nodes links
         nodeFortPlayer.addWay(nodeEmptyPlayer);
+        nodeFortPlayer.addWay(nodeBarrackA);
+        nodeBarrackA.addWay(nodeBarrackB);
+        nodeBarrackC.addWay(nodeBarrackB);
+        nodeBarrackC.addWay(nodeEmptyPlayer);
+        nodeBarrackC.addWay(nodeBarrackD);
+        nodeBarrackB.addWay(nodeEmptyEnemy);
+        nodeFortEnemy.addWay(nodeEmptyEnemy);
+        nodeFortEnemy.addWay(nodeBarrackD);
     }
 }

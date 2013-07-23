@@ -36,6 +36,8 @@ class ALevel extends AScene
     
     public override function update() : AScene
     {
+        // parent update
+        super.update();
         // camera
         if (true == keys[Keyboard.LEFT]) {
             x += 10;
@@ -65,8 +67,6 @@ class ALevel extends AScene
         for (e in this._entities) {
             e.update();
         }
-        // parent update
-        super.update();
         return this;
     }
     
