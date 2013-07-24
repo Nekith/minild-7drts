@@ -52,7 +52,7 @@ class Node extends AEntity
         node.ways.push(this);
     }
     
-    public function capture(owner : Owner) : Void
+    public override function capture(owner : Owner) : Void
     {
         if (null != linked) {
             linked.capture(owner);

@@ -24,9 +24,9 @@ class FirstLevel extends ALevel
         fortPlayer.buildingOrder = nodeFortPlayer;
         fortEnemy.buildingOrder = nodeFortEnemy;
         // empty nodes
-        var nodeEmptyPlayer : Node = new Node(this, new Point(795, 1000));
+        var nodeEmptyPlayer : Node = new Node(this, new Point(745, 950));
         addEntity(nodeEmptyPlayer);
-        var nodeEmptyEnemy : Node = new Node(this, new Point(105, 200));
+        var nodeEmptyEnemy : Node = new Node(this, new Point(155, 250));
         addEntity(nodeEmptyEnemy);
         // barrack A
         var barrackA : Barrack = new Barrack(this, new Point(50, 1000));
