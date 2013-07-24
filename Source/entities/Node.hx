@@ -52,6 +52,13 @@ class Node extends AEntity
         node.ways.push(this);
     }
     
+    public function capture(owner : Owner) : Void
+    {
+        if (null != linked) {
+            linked.capture(owner);
+        }
+    }
+    
     public function getOrder(owner : Owner) : Node
     {
         if (Owner.PLAYER == owner) {

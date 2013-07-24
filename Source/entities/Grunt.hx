@@ -10,11 +10,13 @@ import entities.Node;
 
 class Grunt extends Robot
 {
+    static public inline var COST = 1;
+    
     public function new(level : ALevel, position : Point, owner : Owner)
     {
         super(level, position, owner);
         // stats
-        speed = 1.5;
+        speed = 1.6;
         range = 15;
         reload = 30;
         damage = 2;

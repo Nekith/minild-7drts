@@ -26,6 +26,10 @@ class AEntity extends Sprite
         this.owner = owner;
     }
     
+    public function capture(owner : Owner) : Void
+    {
+    }
+    
     public function update() : Void
     {
     }

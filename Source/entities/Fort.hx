@@ -5,6 +5,7 @@ import flash.display.Shape;
 import flash.display.Graphics;
 import scenes.ALevel;
 import entities.AEntity;
+import entities.Grunt;
 
 class Fort extends AEntity
 {
@@ -16,7 +17,7 @@ class Fort extends AEntity
     {
         super(level, position, owner);
         type = "building";
-        buildingTime = 660;
+        buildingTime = Grunt.COST * 540;
         this._figure = new Shape();
         var g : Graphics = this._figure.graphics;
         g.clear();
@@ -30,6 +31,13 @@ class Fort extends AEntity
         addChild(this._figure);
     }
     
+    public override function capture(owner : Owner) : Void
+    {
+        if (this.owner != owner) {
+            // end
+        }
+    }
+    
     public override function update() : Void
     {
         --buildingTime;
@@ -37,7 +45,7 @@ class Fort extends AEntity
             var g : Grunt = new Grunt(level, new Point(x, y), owner);
             g.direction = buildingOrder.getDirection(new Point(x, y));
             level.addEntity(g);
-            buildingTime = 660;
+            buildingTime = Grunt.COST * 540;
         }
         super.update();
     }

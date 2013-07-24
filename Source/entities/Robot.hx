@@ -62,6 +62,7 @@ class Robot extends AEntity
                 // move
                 var n : Node = level.findNode(p);
                 if (null != n) {
+                    n.capture(owner);
                     var o : Node = n.getOrder(owner);
                     if (null != o) {
                         direction = o.getDirection(p);

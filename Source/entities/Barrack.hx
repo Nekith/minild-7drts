@@ -5,6 +5,7 @@ import flash.display.Shape;
 import flash.display.Graphics;
 import scenes.ALevel;
 import entities.AEntity;
+import entities.Grunt;
 
 class Barrack extends AEntity
 {
@@ -19,9 +20,16 @@ class Barrack extends AEntity
         }
         super(level, position, owner);
         type = "building";
-        buildingTime = 600;
+        buildingTime = Grunt.COST * 540;
         this._figure = new Shape();
         addChild(this._figure);
+    }
+    
+    public override function capture(owner : Owner) : Void
+    {
+        if (this.owner != owner) {
+            this.owner = owner;
+        }
     }
     
     public override function update() : Void
@@ -30,17 +38,9 @@ class Barrack extends AEntity
             --buildingTime;
             if (0 == buildingTime) {
                 var g : Grunt = new Grunt(level, new Point(x, y), owner);
-                
-                
-                
-                
-                
-                
-                
-                
-                
+                g.direction = buildingOrder.getDirection(new Point(x, y));
                 level.addEntity(g);
-                buildingTime = 600;
+                buildingTime = Grunt.COST * 540;
             }
         }
         super.update();
