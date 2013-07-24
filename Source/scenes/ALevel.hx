@@ -7,6 +7,7 @@ import flash.display.Graphics;
 import scenes.AScene;
 import entities.AEntity;
 import entities.Node;
+import entities.Robot;
 
 class ALevel extends AScene
 {
@@ -33,6 +34,25 @@ class ALevel extends AScene
     {
         this._entities.push(entity);
         addChild(entity);
+    }
+    
+    public function removeEntity(entity : AEntity) : Void
+    {
+        this._entities.remove(entity);
+        removeChild(entity);
+    }
+    
+    public function findRobots(p : Point, owner : Owner, d : Float) : Array<Robot>
+    {
+        var a : Array<Robot> = new Array<Robot>();
+        for (e in this._entities) {
+            if (e.owner == owner && true == Std.is(e, Robot)) {
+                if (d > Math.sqrt(Math.pow(p.x - e.x, 2) + Math.pow(p.y - e.y, 2))) {
+                    a.push(cast(e, Robot));
+                }
+            }
+        }
+        return a;
     }
     
     public function findNode(p : Point, ?d : Float = 10) : Node

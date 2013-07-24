@@ -62,5 +62,7 @@ class FirstLevel extends ALevel
         nodeBarrackB.addWay(nodeEmptyEnemy);
         nodeFortEnemy.addWay(nodeEmptyEnemy);
         nodeFortEnemy.addWay(nodeBarrackD);
+        // IA orders
+        nodeFortEnemy.enemyOrder = 0;
     }
 }

@@ -16,7 +16,7 @@ class Fort extends AEntity
     {
         super(level, position, owner);
         type = "building";
-        buildingTime = 600;
+        buildingTime = 660;
         this._figure = new Shape();
         var g : Graphics = this._figure.graphics;
         g.clear();
@@ -33,11 +33,11 @@ class Fort extends AEntity
     public override function update() : Void
     {
         --buildingTime;
-        if (400 == buildingTime) {
+        if (0 >= buildingTime) {
             var g : Grunt = new Grunt(level, new Point(x, y), owner);
             g.direction = buildingOrder.getDirection(new Point(x, y));
             level.addEntity(g);
-            buildingTime = 600;
+            buildingTime = 660;
         }
         super.update();
     }

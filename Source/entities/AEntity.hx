@@ -36,6 +36,6 @@ class AEntity extends Sprite
     
     public function clean() : Void
     {
-        level.removeChild(this);
+        level.removeEntity(this);
     }
 }
