@@ -8,18 +8,17 @@ import entities.AEntity;
 
 class Barrack extends AEntity
 {
-    public var buildingDirection(default, null) : Point;
+    public var buildingOrder(default, default) : Node;
     public var buildingTime(default, null) : Int;
     private var _figure : Shape;
     
-    public function new(level : ALevel, position : Point, direction : Point, ?owner : Owner)
+    public function new(level : ALevel, position : Point, ?owner : Owner)
     {
         if (null == owner) {
             owner = Owner.NEUTRAL;
         }
         super(level, position, owner);
         type = "building";
-        buildingDirection = direction;
         buildingTime = 600;
         this._figure = new Shape();
         addChild(this._figure);
@@ -31,7 +30,15 @@ class Barrack extends AEntity
             --buildingTime;
             if (0 == buildingTime) {
                 var g : Grunt = new Grunt(level, new Point(x, y), owner);
-            g.direction = buildingDirection;
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 level.addEntity(g);
                 buildingTime = 600;
             }

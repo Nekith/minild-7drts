@@ -8,15 +8,14 @@ import entities.AEntity;
 
 class Fort extends AEntity
 {
-    public var buildingDirection(default, null) : Point;
+    public var buildingOrder(default, default) : Node;
     public var buildingTime(default, null) : Int;
     private var _figure : Shape;
     
-    public function new(level : ALevel, position : Point, direction : Point, owner : Owner)
+    public function new(level : ALevel, position : Point, owner : Owner)
     {
         super(level, position, owner);
         type = "building";
-        buildingDirection = direction;
         buildingTime = 600;
         this._figure = new Shape();
         var g : Graphics = this._figure.graphics;
@@ -34,9 +33,9 @@ class Fort extends AEntity
     public override function update() : Void
     {
         --buildingTime;
-        if (0 == buildingTime) {
+        if (400 == buildingTime) {
             var g : Grunt = new Grunt(level, new Point(x, y), owner);
-            g.direction = buildingDirection;
+            g.direction = buildingOrder.getDirection(new Point(x, y));
             level.addEntity(g);
             buildingTime = 600;
         }

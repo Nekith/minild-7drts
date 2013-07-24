@@ -10,7 +10,7 @@ import entities.AEntity;
 class Node extends AEntity
 {
     public var linked(default, null) : AEntity;
-    public var ways(default, null) : Array<AEntity>;
+    public var ways(default, null) : Array<Node>;
     public var playerOrder(default, default) : Int;
     public var enemyOrder(default, default) : Int;
     private var _mouseRect : Rectangle;
@@ -52,33 +52,24 @@ class Node extends AEntity
         node.ways.push(this);
     }
     
-    public function getDirection(owner : Owner) : Point
+    public function getOrder(owner : Owner) : Node
     {
-        var vx : Float = 0;
-        var vy : Float = 0;
         if (Owner.PLAYER == owner) {
             if (-1 != playerOrder) {
-                vx = ways[playerOrder].x;
-                vy = ways[playerOrder].y;
+                return ways[playerOrder];
             }
         }
         else {
             if (-1 != enemyOrder) {
-                vx = ways[enemyOrder].x;
-                vy = ways[enemyOrder].y;
+                return ways[enemyOrder];
             }
         }
-        if (0 != vx && 0 != vy) {
-            if (vx >= vy) {
-                vy = vy / vx;
-                vx = 1;
-            }
-            else {
-                vx = vx / vy;
-                vy = 1;
-            }
-        }
-        return new Point(vx, vy);
+        return this;
+    }
+    
+    public function getDirection(p : Point) : Float
+    {
+        return Math.atan2(y - p.y, x - p.x);
     }
     
     public override function update() : Void

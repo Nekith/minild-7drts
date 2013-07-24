@@ -10,7 +10,8 @@ import entities.Node;
 class Grunt extends AEntity
 {
     public var speed(default, null) : Float;
-    public var direction(default, default) : Point;
+    public var direction(default, default) : Float;
+    public var following(default, null) : Node;
     private var _recover : Int;
     private var _figure : Shape;
     
@@ -19,7 +20,7 @@ class Grunt extends AEntity
         super(level, position, owner);
         type = "grunt";
         // stats
-        speed = 1.5;
+        speed = 1.2;
         // states
         this._recover = 0;
         // figure
@@ -39,12 +40,27 @@ class Grunt extends AEntity
     public override function update() : Void
     {
         if (0 == this._recover) {
-            var n : Node = level.findNode(new Point(x, y));
+            var p : Point = new Point(x, y);
+            var n : Node = level.findNode(p);
             if (null != n) {
-                direction = n.getDirection(owner);
+                var o : Node = n.getOrder(owner);
+                if (null != o) {
+                    direction = o.getDirection(p);
+                    following = n;
+                }
+                else {
+                    direction = 0;
+                }
             }
-            x += direction.x * speed;
-            y += direction.y * speed;
+            else {
+                n = level.findNode(p, 40);
+                if (null != n && n != following) {
+                    direction = n.getDirection(p);
+                }
+            }
+            var v : Point = Point.polar(speed, direction);
+            x += v.x * speed;
+            y += v.y * speed;
             this._recover = 3;
         }
         else {

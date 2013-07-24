@@ -35,11 +35,11 @@ class ALevel extends AScene
         addChild(entity);
     }
     
-    public function findNode(p : Point) : Node
+    public function findNode(p : Point, ?d : Float = 10) : Node
     {
         for (e in this._entities) {
             if (true == Std.is(e, Node)) {
-                if (15 > Math.sqrt(Math.pow(p.x - e.x, 2) + Math.pow(p.y - e.y, 2))) {
+                if (d > Math.sqrt(Math.pow(p.x - e.x, 2) + Math.pow(p.y - e.y, 2))) {
                     return cast(e, Node);
                 }
             }
