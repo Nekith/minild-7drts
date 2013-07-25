@@ -8,10 +8,11 @@ import scenes.AScene;
 import entities.AEntity;
 import entities.Node;
 import entities.Robot;
+import Enemy;
 
 class ALevel extends AScene
 {
-    public var size(default, null) : Point;
+    public var enemy(default, null) : Enemy;
     private var _entities : Array<AEntity>;
     private var _background : Shape;
     
@@ -19,6 +20,7 @@ class ALevel extends AScene
     {
         super();
         dimension = size;
+        enemy = new Enemy(this);
         this._entities = [];
         this._background = new Shape();
         var g : Graphics = this._background.graphics;
@@ -69,8 +71,8 @@ class ALevel extends AScene
     
     public override function update() : AScene
     {
-        // parent update
         super.update();
+        enemy.update();
         // camera
         if (true == keys[Keyboard.LEFT]) {
             x += 10;

@@ -79,6 +79,14 @@ class Node extends AEntity
         return Math.atan2(y - p.y, x - p.x);
     }
     
+    public function switchEnemyOrder() : Void
+    {
+        ++enemyOrder;
+        if (ways.length <= enemyOrder) {
+            enemyOrder = 0;
+        }
+    }
+    
     public override function update() : Void
     {
         --this._changedAt;
