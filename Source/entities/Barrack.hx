@@ -1,17 +1,24 @@
 package entities;
 
 import flash.geom.Point;
-import flash.display.Shape;
-import flash.display.Graphics;
+import flash.display.Bitmap;
+import flash.text.TextField;
+import flash.text.TextFormat;
+import flash.text.TextFormatAlign;
 import scenes.ALevel;
 import entities.AEntity;
+import entities.ARobot;
 import entities.Grunt;
+import Library;
 
 class Barrack extends AEntity
 {
     public var buildingOrder(default, default) : Node;
+    public var buildingIndex(default, null) : Int;
     public var buildingTime(default, null) : Int;
-    private var _figure : Shape;
+    private var _figure : Bitmap;
+    private var _timer : TextField;
+    private var _changedAt : Int;
     
     public function new(level : ALevel, position : Point, ?owner : Owner)
     {
@@ -20,15 +27,47 @@ class Barrack extends AEntity
         }
         super(level, position, owner);
         type = "building";
-        buildingTime = Grunt.COST * 540;
-        this._figure = new Shape();
+        buildingIndex = 0;
+        buildingTime = Grunt.COST * ARobot.TIME;
+        this._changedAt = 0;
+        // figure
+        this._figure = new Bitmap(new BitmapDataBarrackN(0, 0));
+        this._figure.x = -32;
+        this._figure.y = -32;
         addChild(this._figure);
+        // timer
+        var f : PixelFont = new PixelFont();
+        var tf : TextFormat = new TextFormat(f.fontName, 12, 0x00FF00);
+        tf.align = TextFormatAlign.RIGHT;
+        this._timer = new TextField();
+        this._timer.embedFonts = true;
+        this._timer.defaultTextFormat = tf;
+        this._timer.text = Std.string(Math.fround(buildingTime / 60));
+        this._timer.x = 10;
+        this._timer.y = 7;
+        this._timer.width = 18;
+        addChild(this._timer);
     }
     
     public override function capture(owner : Owner) : Void
     {
         if (this.owner != owner) {
             this.owner = owner;
+            removeChild(this._figure);
+            if (Owner.PLAYER == owner) {
+                this._figure = new Bitmap(new BitmapDataBarrackR(0, 0));
+            }
+            else if (Owner.ENEMY == owner) {
+                this._figure = new Bitmap(new BitmapDataBarrackB(0, 0));
+            }
+            else {
+                this._figure = new Bitmap(new BitmapDataBarrackN(0, 0));
+            }
+            this._figure.x = -32;
+            this._figure.y = -32;
+            addChild(this._figure);
+            removeChild(this._timer);
+            addChild(this._timer);
         }
     }
     
@@ -37,10 +76,37 @@ class Barrack extends AEntity
         if (Owner.NEUTRAL != owner) {
             --buildingTime;
             if (0 == buildingTime) {
-                var g : Grunt = new Grunt(level, new Point(x, y), owner);
+                var g : ARobot = Type.createInstance(level.barrackOptions[buildingIndex], [ level, new Point(x, y), owner ]);
                 g.direction = buildingOrder.getDirection(new Point(x, y));
-                level.addEntity(g);
-                buildingTime = Grunt.COST * 540;
+                buildingTime = g.getCost() * ARobot.TIME;
+            }
+            if (Owner.PLAYER == owner) {
+                if (true == level.click && 0 >= this._changedAt) {
+                    var p : Point = new Point(level.mouse.x - level.x - x, level.mouse.y - level.y - y);
+                    if (-9 <= p.x && 8 >= p.x && -29 <= p.y && -9 >= p.y) {
+                        --buildingIndex;
+                        if (0 > buildingIndex) {
+                            buildingIndex = level.barrackOptions.length - 1;
+                        }
+                        var g : ARobot = Type.createInstance(level.barrackOptions[buildingIndex], [ level, new Point(x, y), owner ]);
+                        buildingTime = g.getCost() * ARobot.TIME;
+                        g.clean();
+                        this._changedAt = 15;
+                    }
+                    else if (11 <= p.x && 28 >= p.x && -29 <= p.y && -9 >= p.y) {
+                        ++buildingIndex;
+                        if (level.barrackOptions.length <= buildingIndex) {
+                            buildingIndex = 0;
+                        }
+                        var g : ARobot = Type.createInstance(level.barrackOptions[buildingIndex], [ level, new Point(x, y), owner ]);
+                        buildingTime = g.getCost() * ARobot.TIME;
+                        g.clean();
+                        this._changedAt = 15;
+                    }
+                }
+                else if (0 < this._changedAt) {
+                    --this._changedAt;
+                }
             }
         }
         super.update();
@@ -49,17 +115,12 @@ class Barrack extends AEntity
     public override function draw() : Void
     {
         super.draw();
-        var g : Graphics = this._figure.graphics;
-        g.clear();
-        if (Owner.PLAYER == owner) {
-            g.beginFill(0xDC143C);
-        }
-        else if (Owner.ENEMY == owner) {
-            g.beginFill(0x143CDC);
-        }
-        else {
-            g.beginFill(0xCFE2F3);
-        }
-        g.drawRect(-30, -30, 60, 60);
+        this._timer.text = Std.string(Math.fround(buildingTime / 60));
+    }
+    
+    public override function clean() : Void
+    {
+        removeChild(this._figure);
+        super.clean();
     }
 }

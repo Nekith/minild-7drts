@@ -24,6 +24,7 @@ class AEntity extends Sprite
         x = position.x;
         y = position.y;
         this.owner = owner;
+        level.addEntity(this);
     }
     
     public function capture(owner : Owner) : Void

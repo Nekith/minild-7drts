@@ -7,19 +7,21 @@ import flash.display.Graphics;
 import scenes.AScene;
 import entities.AEntity;
 import entities.Node;
-import entities.Robot;
+import entities.ARobot;
 import Enemy;
 
 class ALevel extends AScene
 {
+    public var barrackOptions(default, null) : Array<Class<ARobot>>;
     public var enemy(default, null) : Enemy;
     private var _entities : Array<AEntity>;
     private var _background : Shape;
     
-    public function new(size : Point, start : Point)
+    private function new(size : Point, start : Point)
     {
         super();
         dimension = size;
+        barrackOptions = [];
         enemy = new Enemy(this);
         this._entities = [];
         this._background = new Shape();
@@ -44,13 +46,13 @@ class ALevel extends AScene
         removeChild(entity);
     }
     
-    public function findRobots(p : Point, owner : Owner, d : Float) : Array<Robot>
+    public function findRobots(p : Point, owner : Owner, d : Float) : Array<ARobot>
     {
-        var a : Array<Robot> = new Array<Robot>();
+        var a : Array<ARobot> = new Array<ARobot>();
         for (e in this._entities) {
-            if (e.owner == owner && true == Std.is(e, Robot)) {
+            if (e.owner == owner && true == Std.is(e, ARobot)) {
                 if (d > Math.sqrt(Math.pow(p.x - e.x, 2) + Math.pow(p.y - e.y, 2))) {
-                    a.push(cast(e, Robot));
+                    a.push(cast(e, ARobot));
                 }
             }
         }

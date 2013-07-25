@@ -7,19 +7,21 @@ import scenes.ALevel;
 import entities.AEntity;
 import entities.Node;
 
-class Robot extends AEntity
+class ARobot extends AEntity
 {
+    static public inline var TIME : Int = 540;
     public var speed(default, null) : Float;
     public var range(default, null) : Float;
     public var reload(default, null) : Int;
     public var damage(default, null) : Int;
     public var armor(default, null) : Int;
+    public var life(default, null) : Int;
     public var direction(default, default) : Float;
     public var following(default, null) : Node;
     private var _recover : Int;
     private var _figure : Shape;
     
-    public function new(level : ALevel, position : Point, owner : Owner)
+    private function new(level : ALevel, position : Point, owner : Owner)
     {
         super(level, position, owner);
         type = "robot";
@@ -39,10 +41,15 @@ class Robot extends AEntity
         addChild(this._figure);
     }
     
+    public function getCost() : Int
+    {
+        return 1;
+    }
+    
     public function hit(damage : Int) : Void
     {
-        armor -= damage;
-        if (0 >= armor) {
+        life -= (armor >= damage ? 1 : damage - armor);
+        if (0 >= life) {
             clean();
         }
     }
@@ -51,10 +58,10 @@ class Robot extends AEntity
     {
         if (0 >= this._recover) {
             var p : Point = new Point(x, y);
-            var a : Array<Robot> = level.findRobots(p, (Owner.PLAYER == owner ? Owner.ENEMY : Owner.PLAYER), range);
+            var a : Array<ARobot> = level.findRobots(p, (Owner.PLAYER == owner ? Owner.ENEMY : Owner.PLAYER), range);
             if (0 != a.length) {
                 // shoot
-                var t : Robot = a[Std.random(a.length)];
+                var t : ARobot = a[Std.random(a.length)];
                 t.hit(damage);
                 this._recover = reload;
             }

@@ -5,6 +5,7 @@ import flash.display.Shape;
 import flash.display.Graphics;
 import scenes.ALevel;
 import entities.AEntity;
+import entities.ARobot;
 import entities.Grunt;
 
 class Fort extends AEntity
@@ -17,7 +18,7 @@ class Fort extends AEntity
     {
         super(level, position, owner);
         type = "building";
-        buildingTime = Grunt.COST * 540;
+        buildingTime = Grunt.COST * ARobot.TIME;
         this._figure = new Shape();
         var g : Graphics = this._figure.graphics;
         g.clear();
@@ -44,8 +45,7 @@ class Fort extends AEntity
         if (0 >= buildingTime) {
             var g : Grunt = new Grunt(level, new Point(x, y), owner);
             g.direction = buildingOrder.getDirection(new Point(x, y));
-            level.addEntity(g);
-            buildingTime = Grunt.COST * 540;
+            buildingTime = Grunt.COST * ARobot.TIME;
         }
         super.update();
     }

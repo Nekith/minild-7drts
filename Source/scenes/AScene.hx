@@ -21,7 +21,7 @@ class AScene extends Sprite
     private var _currentTime : Float = 0;
     private var _accumulator : Float = 0;
     
-    public function new()
+    private function new()
     {
         super();
 		var stage = Lib.current.stage;

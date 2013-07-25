@@ -19,13 +19,9 @@ class UserInterface extends Sprite
         var g : Graphics = cursor.graphics;
         g.clear();
         g.beginFill(0xDC143C);
-        g.drawRect(-1, -12, 3, 7);
+        g.drawRect(0, 0, 2, 6);
         g.beginFill(0xDC143C);
-        g.drawRect(-1, 5, 3, 7);
-        g.beginFill(0xDC143C);
-        g.drawRect(-12, -1, 7, 3);
-        g.beginFill(0xDC143C);
-        g.drawRect(5, -1, 7, 3);
+        g.drawRect(0, 0, 6, 2);
         addChild(cursor);
         var stage = Lib.current.stage;
         stage.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMove);
