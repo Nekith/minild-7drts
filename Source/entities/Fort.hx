@@ -18,7 +18,9 @@ class Fort extends AEntity
     {
         super(level, position, owner);
         type = "building";
-        buildingTime = Grunt.COST * ARobot.TIME;
+        var g : ARobot = Type.createInstance(level.barrackOptions[0], [ level, new Point(x, y), owner ]);
+        buildingTime = g.getCost() * ARobot.TIME;
+        g.clean();
         this._figure = new Shape();
         var g : Graphics = this._figure.graphics;
         g.clear();
@@ -45,7 +47,7 @@ class Fort extends AEntity
         if (0 >= buildingTime) {
             var g : Grunt = new Grunt(level, new Point(x, y), owner);
             g.direction = buildingOrder.getDirection(new Point(x, y));
-            buildingTime = Grunt.COST * ARobot.TIME;
+            buildingTime = g.getCost() * ARobot.TIME;
         }
         super.update();
     }

@@ -10,14 +10,12 @@ import entities.Node;
 
 class Psycho extends ARobot
 {
-    static public inline var COST = 2;
-    
     public function new(level : ALevel, position : Point, owner : Owner)
     {
         super(level, position, owner);
         // stats
         speed = 1.4;
-        range = 15;
+        range = 20;
         reload = 20;
         damage = 2;
         armor = 2;

@@ -10,12 +10,23 @@ import flash.display.BitmapData;
 
 class Library
 {
-    static public function init() : Void
+    static private var _instance : Library = null;
+    public var barrackB(default, null) : BitmapData;
+    public var barrackN(default, null) : BitmapData;
+    public var barrackR(default, null) : BitmapData;
+    
+    static public function getInstance() : Library
     {
-        //Font.registerFont(PixelFont);
+        if (null == _instance) {
+            _instance = new Library();
+        }
+        return _instance;
     }
     
     private function new()
     {
+        barrackB = new BitmapDataBarrackB(0, 0);
+        barrackN = new BitmapDataBarrackN(0, 0);
+        barrackR = new BitmapDataBarrackR(0, 0);
     }
 }
