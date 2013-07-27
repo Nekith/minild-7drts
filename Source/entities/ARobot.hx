@@ -1,7 +1,9 @@
 package entities;
 
 import flash.geom.Point;
-import flash.display.Shape;
+import flash.geom.Rectangle;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
 import flash.display.Graphics;
 import scenes.ALevel;
 import entities.AEntity;
@@ -9,7 +11,7 @@ import entities.Node;
 
 class ARobot extends AEntity
 {
-    static public inline var TIME : Int = 540;
+    static public inline var TIME : Int = 600;
     public var speed(default, null) : Float;
     public var range(default, null) : Float;
     public var reload(default, null) : Int;
@@ -18,26 +20,24 @@ class ARobot extends AEntity
     public var life(default, null) : Int;
     public var direction(default, default) : Float;
     public var following(default, null) : Node;
+    public var sprite(default, null) : BitmapData;
     private var _recover : Int;
-    private var _figure : Shape;
+    private var _anim : Int;
+    private var _figure : Bitmap;
+    private var _figureData : BitmapData;
     
-    private function new(level : ALevel, position : Point, owner : Owner)
+    private function new(level : ALevel, position : Point, owner : Owner, sprite : BitmapData)
     {
         super(level, position, owner);
         type = "robot";
         // states
         this._recover = 0;
-        // figure
-        this._figure = new Shape();
-        var g : Graphics = this._figure.graphics;
-        g.clear();
-        if (Owner.PLAYER == owner) {
-            g.beginFill(0xDC143C);
-        }
-        else {
-            g.beginFill(0x143CDC);
-        }
-        g.drawCircle(0, 0, 6);
+        this._anim = 0;
+        this.sprite = sprite;
+        this._figureData = new BitmapData(16, 16, true);
+        this._figure = new Bitmap(this._figureData);
+        this._figure.x = -8;
+        this._figure.y = -8;
         addChild(this._figure);
     }
     
@@ -95,6 +95,40 @@ class ARobot extends AEntity
             --this._recover;
         }
         super.update();
+    }
+    
+    public override function draw() : Void
+    {
+        if (3 >= this._recover) {
+            ++this._anim;
+            var vx : Int = 0;
+            var vy : Int = 0;
+            var v : Point = Point.polar(speed, direction);
+            if (Math.abs(v.y) >= Math.abs(v.x)) {
+                if (v.y >= 0) {
+                    vy = 0;
+                }
+                else {
+                    vy = 32;
+                }
+            }
+            else {
+                if (v.x >= 0) {
+                    vy = 48;
+                }
+                else {
+                    vy = 16;
+                }
+            }
+            if (60 <= this._anim) {
+                vx = 0;
+                this._anim = 0;
+            }
+            else if (30 <= this._anim) {
+                vx = 16;
+            }
+            this._figureData.copyPixels(sprite, new Rectangle(vx, vy, 16, 16), new Point(0, 0));
+        }
     }
     
     public override function clean() : Void

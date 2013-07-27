@@ -1,35 +1,26 @@
 package entities;
 
 import flash.geom.Point;
-import flash.display.Shape;
+import flash.display.BitmapData;
 import flash.display.Graphics;
 import scenes.ALevel;
 import entities.AEntity;
 import entities.ARobot;
 import entities.Node;
+import Library;
 
 class Psycho extends ARobot
 {
     public function new(level : ALevel, position : Point, owner : Owner)
     {
-        super(level, position, owner);
+        super(level, position, owner, (Owner.PLAYER == owner ? Library.getInstance().psychoR : Library.getInstance().psychoB));
         // stats
-        speed = 1.4;
+        speed = 1.5;
         range = 20;
         reload = 20;
         damage = 2;
         armor = 2;
-        life = 8;
-        // figure
-        var g : Graphics = this._figure.graphics;
-        g.clear();
-        if (Owner.PLAYER == owner) {
-            g.beginFill(0xFF003C);
-        }
-        else {
-            g.beginFill(0x143CDC);
-        }
-        g.drawCircle(0, 0, 12);
+        life = 10;
     }
     
     public override function getCost() : Int

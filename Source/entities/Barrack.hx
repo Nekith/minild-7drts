@@ -1,7 +1,9 @@
 package entities;
 
 import flash.geom.Point;
+import flash.geom.Rectangle;
 import flash.display.Bitmap;
+import flash.display.BitmapData;
 import flash.text.TextField;
 import flash.text.TextFormat;
 import flash.text.TextFormatAlign;
@@ -17,6 +19,8 @@ class Barrack extends AEntity
     public var buildingIndex(default, null) : Int;
     public var buildingTime(default, null) : Int;
     private var _figure : Bitmap;
+    private var _robot : Bitmap;
+    private var _robotData : BitmapData;
     private var _timer : TextField;
     private var _changedAt : Int;
     
@@ -32,6 +36,14 @@ class Barrack extends AEntity
         buildingTime = g.getCost() * ARobot.TIME;
         g.clean();
         this._changedAt = 0;
+        // robot
+        this._robotData = new BitmapData(16, 16, true);
+        this._robotData.copyPixels(g.sprite, new Rectangle(80, 0, 16, 16), new Point(0, 0));
+        this._robot = new Bitmap(this._robotData);
+        this._robot.x = -8;
+        this._robot.y = -8;
+        this._robot.alpha = 0;
+        addChild(this._robot);
         // figure
         this._figure = new Bitmap(Library.getInstance().barrackN);
         this._figure.x = -32;
@@ -60,10 +72,12 @@ class Barrack extends AEntity
             if (Owner.PLAYER == owner) {
                 this._figure = new Bitmap(Library.getInstance().barrackR);
                 this._timer.alpha = 1;
+                this._robot.alpha = 1;
             }
             else if (Owner.ENEMY == owner) {
                 this._figure = new Bitmap(Library.getInstance().barrackB);
                 this._timer.alpha = 1;
+                this._robot.alpha = 1;
             }
             else {
                 this._figure = new Bitmap(Library.getInstance().barrackN);
@@ -73,6 +87,12 @@ class Barrack extends AEntity
             addChild(this._figure);
             removeChild(this._timer);
             addChild(this._timer);
+            // update robot
+            var g : ARobot = Type.createInstance(level.barrackOptions[buildingIndex], [ level, new Point(x, y), owner ]);
+            removeChild(this._robot);
+            this._robotData.copyPixels(g.sprite, new Rectangle(80, 0, 16, 16), new Point(0, 0));
+            addChild(this._robot);
+            g.clean();
         }
     }
     
@@ -95,6 +115,7 @@ class Barrack extends AEntity
                         }
                         var g : ARobot = Type.createInstance(level.barrackOptions[buildingIndex], [ level, new Point(x, y), owner ]);
                         buildingTime = g.getCost() * ARobot.TIME;
+                        this._robotData.copyPixels(g.sprite, new Rectangle(80, 0, 16, 16), new Point(0, 0));
                         g.clean();
                         this._changedAt = 15;
                     }
@@ -105,6 +126,7 @@ class Barrack extends AEntity
                         }
                         var g : ARobot = Type.createInstance(level.barrackOptions[buildingIndex], [ level, new Point(x, y), owner ]);
                         buildingTime = g.getCost() * ARobot.TIME;
+                        this._robotData.copyPixels(g.sprite, new Rectangle(80, 0, 16, 16), new Point(0, 0));
                         g.clean();
                         this._changedAt = 15;
                     }
@@ -126,6 +148,8 @@ class Barrack extends AEntity
     public override function clean() : Void
     {
         removeChild(this._figure);
+        removeChild(this._robot);
+        removeChild(this._timer);
         super.clean();
     }
 }

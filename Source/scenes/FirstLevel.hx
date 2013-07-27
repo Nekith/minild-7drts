@@ -55,7 +55,7 @@ class FirstLevel extends ALevel
         nodeFortEnemy.addWay(nodeBarrackD);
         // enemy orders
         enemy.regularSwitching.push(nodeFortEnemy);
-        enemy.regularSwitching.push(nodeBarrackC);
+        //enemy.regularSwitching.push(nodeBarrackC);
         nodeFortEnemy.enemyOrder = 0;
         nodeEmptyEnemy.enemyOrder = 0;
         nodeBarrackD.enemyOrder = 0;
