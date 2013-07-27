@@ -17,6 +17,7 @@ class Fort extends AEntity
     public function new(level : ALevel, position : Point, owner : Owner)
     {
         super(level, position, owner);
+        level.addBuilding(this);
         type = "building";
         var g : ARobot = Type.createInstance(level.barrackOptions[0], [ level, new Point(x, y), owner ]);
         buildingTime = g.getCost() * ARobot.TIME;

@@ -10,8 +10,7 @@ Click on :
 * arrows on building ;
 * arrows on waypoints.
 
-Controls :
-* everything : Mouse
+Keyboard arrows move the view/camera.
 
 Yes, it's inspired by Z, from The Bitmap Brothers (1996).
 

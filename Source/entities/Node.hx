@@ -21,6 +21,7 @@ class Node extends AEntity
     public function new(level : ALevel, position : Point, ?linked : AEntity)
     {
         super(level, position);
+        level.addBuilding(this);
         type = "node";
         this.linked = linked;
         ways = [];

@@ -4,6 +4,7 @@ import flash.text.Font;
 import flash.display.BitmapData;
 
 @:font("assets/font/slkscr.ttf") class PixelFont extends Font { }
+@:bitmap("assets/graphics/barracka.png") class BitmapDataBarrackA extends BitmapData { }
 @:bitmap("assets/graphics/barrackb.png") class BitmapDataBarrackB extends BitmapData { }
 @:bitmap("assets/graphics/barrackn.png") class BitmapDataBarrackN extends BitmapData { }
 @:bitmap("assets/graphics/barrackr.png") class BitmapDataBarrackR extends BitmapData { }
@@ -15,6 +16,7 @@ import flash.display.BitmapData;
 class Library
 {
     static private var _instance : Library = null;
+    public var barrackA(default, null) : BitmapData;
     public var barrackB(default, null) : BitmapData;
     public var barrackN(default, null) : BitmapData;
     public var barrackR(default, null) : BitmapData;
@@ -33,6 +35,7 @@ class Library
     
     private function new()
     {
+        barrackA = new BitmapDataBarrackA(0, 0);
         barrackB = new BitmapDataBarrackB(0, 0);
         barrackN = new BitmapDataBarrackN(0, 0);
         barrackR = new BitmapDataBarrackR(0, 0);

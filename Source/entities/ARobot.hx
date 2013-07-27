@@ -29,6 +29,7 @@ class ARobot extends AEntity
     private function new(level : ALevel, position : Point, owner : Owner, sprite : BitmapData)
     {
         super(level, position, owner);
+        level.addEntity(this);
         type = "robot";
         // states
         this._recover = 0;
@@ -99,6 +100,7 @@ class ARobot extends AEntity
     
     public override function draw() : Void
     {
+        super.draw();
         if (3 >= this._recover) {
             ++this._anim;
             var vx : Int = 0;
@@ -134,6 +136,7 @@ class ARobot extends AEntity
     public override function clean() : Void
     {
         removeChild(this._figure);
+        level.removeEntity(this);
         super.clean();
     }
 }

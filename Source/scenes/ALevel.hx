@@ -3,6 +3,7 @@ package scenes;
 import flash.geom.Point;
 import flash.ui.Keyboard;
 import flash.display.Shape;
+import flash.display.Sprite;
 import flash.display.Graphics;
 import scenes.AScene;
 import entities.AEntity;
@@ -14,8 +15,10 @@ class ALevel extends AScene
 {
     public var barrackOptions(default, null) : Array<Class<ARobot>>;
     public var enemy(default, null) : Enemy;
-    private var _entities : Array<AEntity>;
+    private var _buildings : Array<AEntity>;
+    private var _units : Array<AEntity>;
     private var _background : Shape;
+    private var _unitground : Sprite;
     
     private function new(size : Point, start : Point)
     {
@@ -23,7 +26,8 @@ class ALevel extends AScene
         dimension = size;
         barrackOptions = [];
         enemy = new Enemy(this);
-        this._entities = [];
+        this._buildings = [];
+        this._units = [];
         this._background = new Shape();
         var g : Graphics = this._background.graphics;
         g.clear();
@@ -32,24 +36,32 @@ class ALevel extends AScene
         addChild(this._background);
         x = -start.x + 500;
         y = -start.y + 300;
+        this._unitground = new Sprite();
+        addChild(this._unitground);
     }
     
     public function addEntity(entity : AEntity) : Void
     {
-        this._entities.push(entity);
-        addChild(entity);
+        this._units.push(entity);
+        this._unitground.addChild(entity);
     }
     
     public function removeEntity(entity : AEntity) : Void
     {
-        this._entities.remove(entity);
-        removeChild(entity);
+        this._units.remove(entity);
+        this._unitground.removeChild(entity);
+    }
+    
+    public function addBuilding(entity : AEntity) : Void
+    {
+        this._buildings.push(entity);
+        addChild(entity);
     }
     
     public function findRobots(p : Point, owner : Owner, d : Float) : Array<ARobot>
     {
         var a : Array<ARobot> = new Array<ARobot>();
-        for (e in this._entities) {
+        for (e in this._units) {
             if (e.owner == owner && true == Std.is(e, ARobot)) {
                 if (d > Math.sqrt(Math.pow(p.x - e.x, 2) + Math.pow(p.y - e.y, 2))) {
                     a.push(cast(e, ARobot));
@@ -61,7 +73,7 @@ class ALevel extends AScene
     
     public function findNode(p : Point, ?d : Float = 10) : Node
     {
-        for (e in this._entities) {
+        for (e in this._buildings) {
             if (true == Std.is(e, Node)) {
                 if (d > Math.sqrt(Math.pow(p.x - e.x, 2) + Math.pow(p.y - e.y, 2))) {
                     return cast(e, Node);
@@ -101,7 +113,10 @@ class ALevel extends AScene
             y = -dimension.y + 600 - 50;
         }
         // entities update
-        for (e in this._entities) {
+        for (e in this._buildings) {
+            e.update();
+        }
+        for (e in this._units) {
             e.update();
         }
         return this;
@@ -109,7 +124,10 @@ class ALevel extends AScene
     
     public override function draw() : Void
     {
-        for (e in this._entities) {
+        for (e in this._buildings) {
+            e.draw();
+        }
+        for (e in this._units) {
             e.draw();
         }
         super.draw();
@@ -117,11 +135,18 @@ class ALevel extends AScene
     
     public override function clean() : Void
     {
-        while (this._entities.length > 0) {
-            var e : AEntity = this._entities.pop();
+        while (this._buildings.length > 0) {
+            var e : AEntity = this._buildings.pop();
             e.clean();
             removeChild(e);
         }
+        while (this._units.length > 0) {
+            var e : AEntity = this._units.pop();
+            e.clean();
+            this._unitground.removeChild(e);
+        }
+        removeChild(this._background);
+        removeChild(this._unitground);
         super.clean();
     }
 }

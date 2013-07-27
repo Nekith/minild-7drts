@@ -24,7 +24,6 @@ class AEntity extends Sprite
         x = position.x;
         y = position.y;
         this.owner = owner;
-        level.addEntity(this);
     }
     
     public function capture(owner : Owner) : Void
@@ -41,6 +40,5 @@ class AEntity extends Sprite
     
     public function clean() : Void
     {
-        level.removeEntity(this);
     }
 }

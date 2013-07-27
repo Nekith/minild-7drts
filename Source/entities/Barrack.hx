@@ -19,9 +19,11 @@ class Barrack extends AEntity
     public var buildingIndex(default, null) : Int;
     public var buildingTime(default, null) : Int;
     private var _figure : Bitmap;
+    private var _lights : Bitmap;
     private var _robot : Bitmap;
     private var _robotData : BitmapData;
     private var _timer : TextField;
+    private var _anim : Int;
     private var _changedAt : Int;
     
     public function new(level : ALevel, position : Point, ?owner : Owner)
@@ -30,11 +32,13 @@ class Barrack extends AEntity
             owner = Owner.NEUTRAL;
         }
         super(level, position, owner);
+        level.addBuilding(this);
         type = "building";
         buildingIndex = 0;
         var g : ARobot = Type.createInstance(level.barrackOptions[buildingIndex], [ level, new Point(x, y), owner ]);
         buildingTime = g.getCost() * ARobot.TIME;
         g.clean();
+        this._anim = 0;
         this._changedAt = 0;
         // robot
         this._robotData = new BitmapData(16, 16, true);
@@ -49,6 +53,11 @@ class Barrack extends AEntity
         this._figure.x = -32;
         this._figure.y = -32;
         addChild(this._figure);
+        this._lights = new Bitmap(Library.getInstance().barrackA);
+        this._lights.x = -32;
+        this._lights.y = -32;
+        this._lights.alpha = 0;
+        addChild(this._lights);
         // timer
         var f : PixelFont = new PixelFont();
         var tf : TextFormat = new TextFormat(f.fontName, 12, 0x00FF00);
@@ -58,7 +67,7 @@ class Barrack extends AEntity
         this._timer.defaultTextFormat = tf;
         this._timer.text = Std.string(Math.fround(buildingTime / 60));
         this._timer.x = 10;
-        this._timer.y = 7;
+        this._timer.y = 6;
         this._timer.width = 18;
         this._timer.alpha = 0;
         addChild(this._timer);
@@ -81,10 +90,14 @@ class Barrack extends AEntity
             }
             else {
                 this._figure = new Bitmap(Library.getInstance().barrackN);
+                this._timer.alpha = 0;
+                this._robot.alpha = 0;
             }
             this._figure.x = -32;
             this._figure.y = -32;
             addChild(this._figure);
+            removeChild(this._lights);
+            addChild(this._lights);
             removeChild(this._timer);
             addChild(this._timer);
             // update robot
@@ -142,12 +155,23 @@ class Barrack extends AEntity
     public override function draw() : Void
     {
         super.draw();
+        if (Owner.NEUTRAL != owner) {
+            ++this._anim;
+            if (120 <= this._anim) {
+                this._lights.alpha = 1;
+                this._anim = 0;
+            }
+            else if (60 <= this._anim) {
+                this._lights.alpha = 0;
+            }
+        }
         this._timer.text = Std.string(Math.fround(buildingTime / 60));
     }
     
     public override function clean() : Void
     {
         removeChild(this._figure);
+        removeChild(this._lights);
         removeChild(this._robot);
         removeChild(this._timer);
         super.clean();
