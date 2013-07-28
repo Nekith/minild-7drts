@@ -35,14 +35,14 @@ class Barrack extends AEntity
         level.addBuilding(this);
         type = "building";
         buildingIndex = 0;
-        var g : ARobot = Type.createInstance(level.barrackOptions[buildingIndex], [ level, new Point(x, y), owner ]);
-        buildingTime = g.getCost() * ARobot.TIME;
-        g.clean();
+        var r : ARobot = Type.createInstance(level.barrackOptions[buildingIndex], [ level, new Point(x, y), owner ]);
+        buildingTime = r.getCost() * ARobot.TIME;
+        r.clean();
         this._anim = 0;
         this._changedAt = 0;
         // robot
         this._robotData = new BitmapData(16, 16, true);
-        this._robotData.copyPixels(g.sprite, new Rectangle(80, 0, 16, 16), new Point(0, 0));
+        this._robotData.copyPixels(r.sprite, new Rectangle(80, 0, 16, 16), new Point(0, 0));
         this._robot = new Bitmap(this._robotData);
         this._robot.x = -8;
         this._robot.y = -8;
@@ -66,7 +66,7 @@ class Barrack extends AEntity
         this._timer.embedFonts = true;
         this._timer.defaultTextFormat = tf;
         this._timer.selectable = false;
-        this._timer.text = Std.string(Math.fround(buildingTime / 60));
+        this._timer.text = Std.string(Math.ffloor(buildingTime / 60));
         this._timer.x = 10;
         this._timer.y = 6;
         this._timer.width = 18;
@@ -166,7 +166,7 @@ class Barrack extends AEntity
                 this._lights.alpha = 0;
             }
         }
-        this._timer.text = Std.string(Math.fround(buildingTime / 60));
+        this._timer.text = Std.string(Math.ffloor(buildingTime / 60));
     }
     
     public override function clean() : Void

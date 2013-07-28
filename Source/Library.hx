@@ -8,6 +8,9 @@ import flash.display.BitmapData;
 @:bitmap("assets/graphics/barrackb.png") class BitmapDataBarrackB extends BitmapData { }
 @:bitmap("assets/graphics/barrackn.png") class BitmapDataBarrackN extends BitmapData { }
 @:bitmap("assets/graphics/barrackr.png") class BitmapDataBarrackR extends BitmapData { }
+@:bitmap("assets/graphics/forta.png") class BitmapDataFortA extends BitmapData { }
+@:bitmap("assets/graphics/fortb.png") class BitmapDataFortB extends BitmapData { }
+@:bitmap("assets/graphics/fortr.png") class BitmapDataFortR extends BitmapData { }
 @:bitmap("assets/graphics/gruntb.png") class BitmapDataGruntB extends BitmapData { }
 @:bitmap("assets/graphics/gruntr.png") class BitmapDataGruntR extends BitmapData { }
 @:bitmap("assets/graphics/psychob.png") class BitmapDataPsychoB extends BitmapData { }
@@ -21,6 +24,9 @@ class Library
     public var barrackB(default, null) : BitmapData;
     public var barrackN(default, null) : BitmapData;
     public var barrackR(default, null) : BitmapData;
+    public var fortA(default, null) : BitmapData;
+    public var fortB(default, null) : BitmapData;
+    public var fortR(default, null) : BitmapData;
     public var gruntB(default, null) : BitmapData;
     public var gruntR(default, null) : BitmapData;
     public var psychoB(default, null) : BitmapData;
@@ -40,6 +46,9 @@ class Library
         barrackB = new BitmapDataBarrackB(0, 0);
         barrackN = new BitmapDataBarrackN(0, 0);
         barrackR = new BitmapDataBarrackR(0, 0);
+        fortA = new BitmapDataFortA(0, 0);
+        fortB = new BitmapDataFortB(0, 0);
+        fortR = new BitmapDataFortR(0, 0);
         gruntB = new BitmapDataGruntB(0, 0);
         gruntR = new BitmapDataGruntR(0, 0);
         psychoB = new BitmapDataPsychoB(0, 0);
