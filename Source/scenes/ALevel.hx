@@ -110,17 +110,17 @@ class ALevel extends AScene
         if (true == keys[Keyboard.DOWN]) {
             y -= 10;
         }
-        if (x < -dimension.x + 1000 - 50) {
-            x = -dimension.x + 1000 - 50;
+        if (x < -dimension.x + 1000) {
+            x = -dimension.x + 1000;
         }
-        if (x > 50) {
-            x = 50;
+        if (x > 0) {
+            x = 0;
         }
-        if (y > 50) {
-            y = 50;
+        if (y > 0) {
+            y = 0;
         }
-        if (y < -dimension.y + 600 - 50) {
-            y = -dimension.y + 600 - 50;
+        if (y < -dimension.y + 600) {
+            y = -dimension.y + 600;
         }
         // entities update
         for (e in this._buildings) {

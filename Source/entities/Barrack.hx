@@ -131,7 +131,7 @@ class Barrack extends AEntity
                         buildingTime = g.getCost() * ARobot.TIME;
                         this._robotData.copyPixels(g.sprite, new Rectangle(80, 0, 16, 16), new Point(0, 0));
                         g.clean();
-                        this._changedAt = 15;
+                        this._changedAt = 7;
                     }
                     else if (11 <= p.x && 28 >= p.x && -29 <= p.y && -9 >= p.y) {
                         ++buildingIndex;
@@ -142,7 +142,7 @@ class Barrack extends AEntity
                         buildingTime = g.getCost() * ARobot.TIME;
                         this._robotData.copyPixels(g.sprite, new Rectangle(80, 0, 16, 16), new Point(0, 0));
                         g.clean();
-                        this._changedAt = 15;
+                        this._changedAt = 7;
                     }
                 }
                 else if (0 < this._changedAt) {
@@ -158,11 +158,11 @@ class Barrack extends AEntity
         super.draw();
         if (Owner.NEUTRAL != owner) {
             ++this._anim;
-            if (120 <= this._anim) {
+            if (60 <= this._anim) {
                 this._lights.alpha = 1;
                 this._anim = 0;
             }
-            else if (60 <= this._anim) {
+            else if (30 <= this._anim) {
                 this._lights.alpha = 0;
             }
         }

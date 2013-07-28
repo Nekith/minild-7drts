@@ -4,7 +4,7 @@
 	<meta title="Minild7drts" package="com.nekith.minild7drts" version="1.0.0" company="Errant Works" />
 	<app main="Main" path="Export" file="Minild7drts" />
     
-	<window background="#000000" fps="60" />
+	<window background="#000000" fps="30" />
 	<window width="1000" height="600" unless="mobile" />
 	
 	<source path="Source" />

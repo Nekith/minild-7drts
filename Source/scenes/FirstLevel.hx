@@ -13,19 +13,19 @@ class FirstLevel extends ALevel
 {
     public function new()
     {
-        super(new Point(900, 1200), new Point(450, 1100));
+        super(new Point(1000, 1200), new Point(500, 1100));
         // tech
         barrackOptions.push(Grunt);
         barrackOptions.push(Psycho);
         // forts
-        var fortPlayer : Fort = new Fort(this, new Point(450, 1150), Owner.PLAYER);
-        var fortEnemy : Fort = new Fort(this, new Point(450, 50), Owner.ENEMY);
-        var nodeFortPlayer : Node = new Node(this, new Point(450, 1085), fortPlayer);
-        var nodeFortEnemy : Node = new Node(this, new Point(450, 115), fortEnemy);
+        var fortPlayer : Fort = new Fort(this, new Point(500, 1150), Owner.PLAYER);
+        var fortEnemy : Fort = new Fort(this, new Point(500, 50), Owner.ENEMY);
+        var nodeFortPlayer : Node = new Node(this, new Point(500, 1085), fortPlayer);
+        var nodeFortEnemy : Node = new Node(this, new Point(500, 115), fortEnemy);
         fortPlayer.buildingOrder = nodeFortPlayer;
         fortEnemy.buildingOrder = nodeFortEnemy;
         // empty nodes
-        var nodeEmptyPlayer : Node = new Node(this, new Point(745, 950));
+        var nodeEmptyPlayer : Node = new Node(this, new Point(895, 950));
         var nodeEmptyEnemy : Node = new Node(this, new Point(155, 250));
         // barrack A
         var barrackA : Barrack = new Barrack(this, new Point(50, 1000));
@@ -36,12 +36,12 @@ class FirstLevel extends ALevel
         var nodeBarrackB : Node = new Node(this, new Point(105, 550), barrackB);
         barrackB.buildingOrder = nodeBarrackB;
         // barrack C
-        var barrackC : Barrack = new Barrack(this, new Point(850, 550));
-        var nodeBarrackC : Node = new Node(this, new Point(795, 550), barrackC);
+        var barrackC : Barrack = new Barrack(this, new Point(950, 550));
+        var nodeBarrackC : Node = new Node(this, new Point(895, 550), barrackC);
         barrackC.buildingOrder = nodeBarrackC;
         // barrack D
-        var barrackD : Barrack = new Barrack(this, new Point(850, 200));
-        var nodeBarrackD : Node = new Node(this, new Point(795, 200), barrackD);
+        var barrackD : Barrack = new Barrack(this, new Point(950, 200));
+        var nodeBarrackD : Node = new Node(this, new Point(895, 200), barrackD);
         barrackD.buildingOrder = nodeBarrackD;
         // nodes links
         nodeFortPlayer.addWay(nodeEmptyPlayer);

@@ -15,7 +15,7 @@ class Psycho extends ARobot
     {
         super(level, position, owner, (Owner.PLAYER == owner ? Library.getInstance().psychoR : Library.getInstance().psychoB));
         // stats
-        speed = 1.5;
+        speed = 1.4;
         range = 30;
         reload = 20;
         damage = 2;

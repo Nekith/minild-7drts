@@ -89,7 +89,7 @@ class ARobot extends AEntity
                 var v : Point = Point.polar(speed, direction);
                 x += v.x * speed;
                 y += v.y * speed;
-                this._recover = 3;
+                this._recover = 2;
             }
         }
         else {
@@ -101,7 +101,7 @@ class ARobot extends AEntity
     public override function draw() : Void
     {
         super.draw();
-        if (3 >= this._recover) {
+        if (2 >= this._recover) {
             ++this._anim;
             var vx : Int = 0;
             var vy : Int = 0;
@@ -122,11 +122,11 @@ class ARobot extends AEntity
                     vy = 16;
                 }
             }
-            if (60 <= this._anim) {
+            if (30 <= this._anim) {
                 vx = 0;
                 this._anim = 0;
             }
-            else if (30 <= this._anim) {
+            else if (15 <= this._anim) {
                 vx = 16;
             }
             this._figureData.copyPixels(sprite, new Rectangle(vx, vy, 16, 16), new Point(0, 0));

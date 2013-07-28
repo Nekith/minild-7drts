@@ -15,7 +15,7 @@ class Grunt extends ARobot
     {
         super(level, position, owner, (Owner.PLAYER == owner ? Library.getInstance().gruntR : Library.getInstance().gruntB));
         // stats
-        speed = 1.6;
+        speed = 1.5;
         range = 30;
         reload = 30;
         damage = 2;

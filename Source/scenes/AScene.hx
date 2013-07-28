@@ -79,7 +79,7 @@ class AScene extends Sprite
         var frameTime : Float = newTime - _currentTime;
         _currentTime = newTime;
         _accumulator += frameTime;
-        while (1 / 60.0 <= _accumulator) {
+        while (1 / 30.0 <= _accumulator) {
             var scene : AScene = update();
             if (scene != this) {
                 this.clean();
