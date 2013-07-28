@@ -8,7 +8,7 @@ You don't have to control your units, only to give orders at waypoints and to ch
 
 Click on :
 * arrows on building ;
-* arrows on waypoints.
+* waypoints.
 
 Keyboard arrows move the view/camera.
 

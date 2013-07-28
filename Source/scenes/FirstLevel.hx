@@ -63,5 +63,6 @@ class FirstLevel extends ALevel
         nodeBarrackB.enemyOrder = 0;
         nodeBarrackA.enemyOrder = 0;
         nodeEmptyPlayer.enemyOrder = 0;
+        init();
     }
 }

@@ -13,7 +13,7 @@ class Enemy
     {
         regularSwitching = [];
         this._level = level;
-        this._cooldown = 600;
+        this._cooldown = 1200;
     }
     
     public function update()
@@ -22,7 +22,7 @@ class Enemy
             for (n in regularSwitching) {
                 n.switchEnemyOrder();
             }
-            this._cooldown = 600;
+            this._cooldown = 1200;
         }
         else {
             --this._cooldown;

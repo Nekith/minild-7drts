@@ -65,6 +65,7 @@ class Barrack extends AEntity
         this._timer = new TextField();
         this._timer.embedFonts = true;
         this._timer.defaultTextFormat = tf;
+        this._timer.selectable = false;
         this._timer.text = Std.string(Math.fround(buildingTime / 60));
         this._timer.x = 10;
         this._timer.y = 6;
@@ -174,6 +175,7 @@ class Barrack extends AEntity
         removeChild(this._lights);
         removeChild(this._robot);
         removeChild(this._timer);
+        level.removeChild(this);
         super.clean();
     }
 }

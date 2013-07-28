@@ -12,6 +12,7 @@ import flash.display.BitmapData;
 @:bitmap("assets/graphics/gruntr.png") class BitmapDataGruntR extends BitmapData { }
 @:bitmap("assets/graphics/psychob.png") class BitmapDataPsychoB extends BitmapData { }
 @:bitmap("assets/graphics/psychor.png") class BitmapDataPsychoR extends BitmapData { }
+@:bitmap("assets/graphics/title.png") class BitmapDataTitle extends BitmapData { }
 
 class Library
 {

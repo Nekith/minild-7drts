@@ -24,6 +24,14 @@ class AScene extends Sprite
     private function new()
     {
         super();
+        dimension = new Point(1000, 600);
+        mouse = new Point(0, 0);
+        click = false;
+        keys = [];
+    }
+    
+    public function init() : Void
+    {
 		var stage = Lib.current.stage;
         stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
         stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
@@ -34,10 +42,6 @@ class AScene extends Sprite
         stage.addEventListener(Event.DEACTIVATE, onDeactivate);
         stage.addEventListener(Event.ACTIVATE, onActivate);
         _currentTime = Timer.stamp();
-        dimension = new Point(1000, 600);
-        mouse = new Point(0, 0);
-        click = false;
-        keys = [];
         focus = true;
     }
     

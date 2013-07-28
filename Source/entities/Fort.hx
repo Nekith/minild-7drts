@@ -12,33 +12,40 @@ class Fort extends AEntity
 {
     public var buildingOrder(default, default) : Node;
     public var buildingTime(default, null) : Int;
-    private var _figure : Shape;
     
     public function new(level : ALevel, position : Point, owner : Owner)
     {
         super(level, position, owner);
         level.addBuilding(this);
         type = "building";
-        var g : ARobot = Type.createInstance(level.barrackOptions[0], [ level, new Point(x, y), owner ]);
-        buildingTime = g.getCost() * ARobot.TIME;
-        g.clean();
-        this._figure = new Shape();
-        var g : Graphics = this._figure.graphics;
-        g.clear();
+        var r : ARobot = Type.createInstance(level.barrackOptions[0], [ level, new Point(x, y), owner ]);
+        buildingTime = r.getCost() * ARobot.TIME;
+        r.clean();
+        var g : Graphics = graphics;
         if (Owner.PLAYER == owner) {
             g.beginFill(0xDC143C);
         }
         else {
             g.beginFill(0x143CDC);
         }
-        g.drawRect(-50, -35, 100, 70);
-        addChild(this._figure);
+        g.drawRect( -50, -35, 100, 70);
+        g.endFill();
     }
     
-    public override function capture(owner : Owner) : Void
+    public override function capture(attacker : Owner) : Void
     {
-        if (this.owner != owner) {
-            // end
+        if (owner != attacker) {
+            level.win(attacker);
+            owner = attacker;
+            var g : Graphics = graphics;
+            if (Owner.PLAYER == owner) {
+                g.beginFill(0xDC143C);
+            }
+            else {
+                g.beginFill(0x143CDC);
+            }
+            g.drawRect( -50, -35, 100, 70);
+            g.endFill();
         }
     }
     
@@ -51,5 +58,11 @@ class Fort extends AEntity
             buildingTime = g.getCost() * ARobot.TIME;
         }
         super.update();
+    }
+    
+    public override function clean() : Void
+    {
+        level.removeChild(this);
+        super.clean();
     }
 }

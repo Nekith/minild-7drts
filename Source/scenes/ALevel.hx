@@ -6,6 +6,7 @@ import flash.display.Shape;
 import flash.display.Sprite;
 import flash.display.Graphics;
 import scenes.AScene;
+import scenes.MainMenu;
 import entities.AEntity;
 import entities.Node;
 import entities.ARobot;
@@ -15,6 +16,7 @@ class ALevel extends AScene
 {
     public var barrackOptions(default, null) : Array<Class<ARobot>>;
     public var enemy(default, null) : Enemy;
+    public var winner(default, null) : Owner;
     private var _buildings : Array<AEntity>;
     private var _units : Array<AEntity>;
     private var _background : Shape;
@@ -26,6 +28,7 @@ class ALevel extends AScene
         dimension = size;
         barrackOptions = [];
         enemy = new Enemy(this);
+        winner = Owner.NEUTRAL;
         this._buildings = [];
         this._units = [];
         this._background = new Shape();
@@ -83,6 +86,13 @@ class ALevel extends AScene
         return null;
     }
     
+    public function win(owner : Owner) : Void
+    {
+        if (Owner.NEUTRAL == winner) {
+            winner = owner;
+        }
+    }
+    
     public override function update() : AScene
     {
         super.update();
@@ -119,6 +129,9 @@ class ALevel extends AScene
         for (e in this._units) {
             e.update();
         }
+        if (Owner.NEUTRAL != winner) {
+            return new MainMenu();
+        }
         return this;
     }
     
@@ -138,12 +151,10 @@ class ALevel extends AScene
         while (this._buildings.length > 0) {
             var e : AEntity = this._buildings.pop();
             e.clean();
-            removeChild(e);
         }
         while (this._units.length > 0) {
             var e : AEntity = this._units.pop();
             e.clean();
-            this._unitground.removeChild(e);
         }
         removeChild(this._background);
         removeChild(this._unitground);
