@@ -10,12 +10,10 @@ import scenes.MainMenu;
 import entities.AEntity;
 import entities.Node;
 import entities.ARobot;
-import Enemy;
 
 class ALevel extends AScene
 {
     public var barrackOptions(default, null) : Array<Class<ARobot>>;
-    public var enemy(default, null) : Enemy;
     public var winner(default, null) : Owner;
     private var _buildings : Array<AEntity>;
     private var _units : Array<AEntity>;
@@ -27,7 +25,6 @@ class ALevel extends AScene
         super();
         dimension = size;
         barrackOptions = [];
-        enemy = new Enemy(this);
         winner = Owner.NEUTRAL;
         this._buildings = [];
         this._units = [];
@@ -93,10 +90,14 @@ class ALevel extends AScene
         }
     }
     
+    public function enemy() : Void
+    {
+    }
+    
     public override function update() : AScene
     {
         super.update();
-        enemy.update();
+        enemy();
         // camera
         if (true == keys[Keyboard.LEFT]) {
             x += 10;
@@ -130,7 +131,7 @@ class ALevel extends AScene
             e.update();
         }
         if (Owner.NEUTRAL != winner) {
-            return new MainMenu();
+            return new MainMenu((Owner.PLAYER == winner ? "You got 'em !" : "You lost, as always."));
         }
         return this;
     }

@@ -2,7 +2,6 @@ package entities;
 
 import flash.geom.Point;
 import flash.geom.Rectangle;
-import flash.display.Shape;
 import flash.display.Graphics;
 import scenes.ALevel;
 import entities.AEntity;
@@ -15,8 +14,6 @@ class Node extends AEntity
     public var enemyOrder(default, default) : Int;
     private var _mouseRect : Rectangle;
     private var _changedAt : Int;
-    private var _figure : Shape;
-    private var _arrow : Shape;
     
     public function new(level : ALevel, position : Point, ?linked : AEntity)
     {
@@ -31,19 +28,14 @@ class Node extends AEntity
         this._mouseRect = new Rectangle(position.x - 15, position.y -15, 30, 30);
         this._changedAt = 0;
         // figure
-        this._figure = new Shape();
-        var g : Graphics = this._figure.graphics;
+        var g : Graphics = graphics;
         g.clear();
-        g.beginFill(0xCFE2F3);
+        g.lineStyle(1, 0x14DC3C);
         g.drawCircle(0, 0, 12);
-        addChild(this._figure);
-        // arrow
-        this._arrow = new Shape();
-        g = this._arrow.graphics;
-        g.clear();
-        g.beginFill(0x00FF00);
-        g.drawRect(-2, -30, 5, 30);
-        addChild(this._arrow);
+        g.moveTo(-10, -8);
+        g.lineTo(0, -25);
+        g.moveTo(10, -8);
+        g.lineTo(0, -25);
     }
     
     public function addWay(node : Node) : Void
@@ -101,7 +93,7 @@ class Node extends AEntity
     
     public override function draw() : Void
     {
-        this._arrow.rotation = -90 + 180 / Math.PI * Math.atan2(y - ways[playerOrder].y, x - ways[playerOrder].x);
+        this.rotation = -90 + 180 / Math.PI * Math.atan2(y - ways[playerOrder].y, x - ways[playerOrder].x);
         super.draw();
     }
 }

@@ -7,16 +7,17 @@ import entities.Barrack;
 import entities.Fort;
 import entities.Node;
 import entities.Grunt;
-import entities.Psycho;
 
 class FirstLevel extends ALevel
 {
+    private var _iaTimer : Int;
+    private var _nodeFortEnemy : Node;
+    
     public function new()
     {
-        super(new Point(1000, 1200), new Point(500, 1100));
+        super(new Point(1000, 1200), new Point(500, 1085));
         // tech
         barrackOptions.push(Grunt);
-        barrackOptions.push(Psycho);
         // forts
         var fortPlayer : Fort = new Fort(this, new Point(500, 1150), Owner.PLAYER);
         var fortEnemy : Fort = new Fort(this, new Point(500, 50), Owner.ENEMY);
@@ -54,8 +55,7 @@ class FirstLevel extends ALevel
         nodeFortEnemy.addWay(nodeEmptyEnemy);
         nodeFortEnemy.addWay(nodeBarrackD);
         // enemy orders
-        enemy.regularSwitching.push(nodeFortEnemy);
-        //enemy.regularSwitching.push(nodeBarrackC);
+        this._nodeFortEnemy = nodeFortEnemy;
         nodeFortEnemy.enemyOrder = 0;
         nodeEmptyEnemy.enemyOrder = 0;
         nodeBarrackD.enemyOrder = 0;
@@ -63,6 +63,24 @@ class FirstLevel extends ALevel
         nodeBarrackB.enemyOrder = 0;
         nodeBarrackA.enemyOrder = 0;
         nodeEmptyPlayer.enemyOrder = 0;
+        // init
         init();
+        this._iaTimer = 500;
+    }
+    
+    public override function enemy() : Void
+    {
+        if (0 == this._iaTimer) {
+            if (0 == this._nodeFortEnemy.enemyOrder) {
+                this._nodeFortEnemy.enemyOrder = 1;
+            }
+            else {
+                this._nodeFortEnemy.enemyOrder = 0;
+            }
+            this._iaTimer = 500;
+        }
+        else {
+            --this._iaTimer;
+        }
     }
 }

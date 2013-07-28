@@ -47,17 +47,6 @@ class Barrack extends AEntity
         this._robot.x = -8;
         this._robot.y = -8;
         this._robot.alpha = 0;
-        addChild(this._robot);
-        // figure
-        this._figure = new Bitmap(Library.getInstance().barrackN);
-        this._figure.x = -32;
-        this._figure.y = -32;
-        addChild(this._figure);
-        this._lights = new Bitmap(Library.getInstance().barrackA);
-        this._lights.x = -32;
-        this._lights.y = -32;
-        this._lights.alpha = 0;
-        addChild(this._lights);
         // timer
         var f : PixelFont = new PixelFont();
         var tf : TextFormat = new TextFormat(f.fontName, 12, 0x00FF00);
@@ -71,7 +60,26 @@ class Barrack extends AEntity
         this._timer.y = 6;
         this._timer.width = 18;
         this._timer.alpha = 0;
+        // figure
+        if (Owner.NEUTRAL == owner) {
+            this._figure = new Bitmap(Library.getInstance().barrackN);
+        }
+        else {
+            this._figure = new Bitmap((Owner.PLAYER == owner ? Library.getInstance().barrackR : Library.getInstance().barrackB));
+            this._robot.alpha = 1.0;
+            this._timer.alpha = 1.0;
+        }
+        this._figure.x = -32;
+        this._figure.y = -32;
+        this._lights = new Bitmap(Library.getInstance().barrackA);
+        this._lights.x = -32;
+        this._lights.y = -32;
+        this._lights.alpha = 0;
+        // add children
+        addChild(this._figure);
+        addChild(this._robot);
         addChild(this._timer);
+        addChild(this._lights);
     }
     
     public override function capture(owner : Owner) : Void

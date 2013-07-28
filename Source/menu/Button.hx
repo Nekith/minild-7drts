@@ -14,8 +14,9 @@ class Button extends Sprite
 {
     public var rect(default, null) : Rectangle;
     private var _label : TextField;
+    private var _help : TextField;
     
-    public function new(rect : Rectangle, text : String)
+    public function new(rect : Rectangle, text : String, ?help : String = "")
     {
         super();
         this.rect = rect;
@@ -40,10 +41,22 @@ class Button extends Sprite
         this._label.y = 7;
         this._label.width = rect.width;
         addChild(this._label);
+        // help
+        var tfh : TextFormat = new TextFormat(f.fontName, 11, 0xB2B2B2);
+        tfh.align = TextFormatAlign.CENTER;
+        this._help = new TextField();
+        this._help.embedFonts = true;
+        this._help.defaultTextFormat = tfh;
+        this._help.selectable = false;
+        this._help.text = help;
+        this._help.y = 35;
+        this._help.width = rect.width;
+        addChild(this._help);
     }
     
     public function clean() : Void
     {
         removeChild(this._label);
+        removeChild(this._help);
     }
 }
