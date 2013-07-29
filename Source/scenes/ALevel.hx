@@ -1,8 +1,10 @@
 package scenes;
 
 import flash.geom.Point;
+import flash.geom.Rectangle;
 import flash.ui.Keyboard;
-import flash.display.Shape;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
 import flash.display.Sprite;
 import flash.display.Graphics;
 import scenes.AScene;
@@ -10,6 +12,7 @@ import scenes.MainMenu;
 import entities.AEntity;
 import entities.Node;
 import entities.ARobot;
+import Library;
 
 class ALevel extends AScene
 {
@@ -17,7 +20,7 @@ class ALevel extends AScene
     public var winner(default, null) : Owner;
     private var _buildings : Array<AEntity>;
     private var _units : Array<AEntity>;
-    private var _background : Shape;
+    private var _background : Bitmap;
     private var _unitground : Sprite;
     
     private function new(size : Point, start : Point)
@@ -28,16 +31,39 @@ class ALevel extends AScene
         winner = Owner.NEUTRAL;
         this._buildings = [];
         this._units = [];
-        this._background = new Shape();
-        var g : Graphics = this._background.graphics;
-        g.clear();
-        g.beginFill(0xF9CB9C);
-        g.drawRect(0, 0, dimension.x, dimension.y);
+        // background
+        var bd : BitmapData = new BitmapData(Std.int(dimension.x), Std.int(dimension.y));
+        var i : Int = -Std.random(32);
+        var startj : Int = -Std.random(32);
+        var rect : Rectangle = new Rectangle(0, 0, 32, 32);
+        while (i < dimension.y) {
+            var j : Int = startj;
+            while (j < dimension.x) {
+                var r : Int = Std.random(4);
+                if (3 == r) {
+                    bd.copyPixels(Library.getInstance().groundD, rect, new Point(j, i));
+                }
+                else if (2 == r) {
+                    bd.copyPixels(Library.getInstance().groundC, rect, new Point(j, i));
+                }
+                else if (1 == r) {
+                    bd.copyPixels(Library.getInstance().groundB, rect, new Point(j, i));
+                }
+                else {
+                    bd.copyPixels(Library.getInstance().groundA, rect, new Point(j, i));
+                }
+                j += 32;
+            }
+            i += 32;
+        }
+        this._background = new Bitmap(bd);
         addChild(this._background);
-        x = -start.x + 500;
-        y = -start.y + 300;
+        // unitground
         this._unitground = new Sprite();
         addChild(this._unitground);
+        // start
+        x = -start.x + 500;
+        y = -start.y + 300;
     }
     
     public function addEntity(entity : AEntity) : Void

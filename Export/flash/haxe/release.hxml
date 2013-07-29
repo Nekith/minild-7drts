@@ -1,0 +1,16 @@
+-main ApplicationMain 
+-lib openfl
+-cp Source
+-cp E:\Haxe\haxe\lib\openfl/1,0,4/
+-D nme4=1
+-D tools=1
+-D nme_ver=4.0.2
+-D nme
+-D nme_install_tool=1
+-D fdb
+-D web
+-swf-version 11
+-swf Export/flash/bin/Minild7drts.swf
+-swf-header 1000:600:30:000000
+-cp Export/flash/haxe
+#--remap nme:flash

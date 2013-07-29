@@ -4,6 +4,10 @@ import flash.text.Font;
 import flash.display.BitmapData;
 
 @:font("assets/font/slkscr.ttf") class PixelFont extends Font { }
+@:bitmap("assets/graphics/grounda.png") class BitmapDataGroundA extends BitmapData { }
+@:bitmap("assets/graphics/groundb.png") class BitmapDataGroundB extends BitmapData { }
+@:bitmap("assets/graphics/groundc.png") class BitmapDataGroundC extends BitmapData { }
+@:bitmap("assets/graphics/groundd.png") class BitmapDataGroundD extends BitmapData { }
 @:bitmap("assets/graphics/barracka.png") class BitmapDataBarrackA extends BitmapData { }
 @:bitmap("assets/graphics/barrackb.png") class BitmapDataBarrackB extends BitmapData { }
 @:bitmap("assets/graphics/barrackn.png") class BitmapDataBarrackN extends BitmapData { }
@@ -20,6 +24,10 @@ import flash.display.BitmapData;
 class Library
 {
     static private var _instance : Library = null;
+    public var groundA(default, null) : BitmapData;
+    public var groundB(default, null) : BitmapData;
+    public var groundC(default, null) : BitmapData;
+    public var groundD(default, null) : BitmapData;
     public var barrackA(default, null) : BitmapData;
     public var barrackB(default, null) : BitmapData;
     public var barrackN(default, null) : BitmapData;
@@ -42,6 +50,10 @@ class Library
     
     private function new()
     {
+        groundA = new BitmapDataGroundA(0, 0);
+        groundB = new BitmapDataGroundB(0, 0);
+        groundC = new BitmapDataGroundC(0, 0);
+        groundD = new BitmapDataGroundC(0, 0);
         barrackA = new BitmapDataBarrackA(0, 0);
         barrackB = new BitmapDataBarrackB(0, 0);
         barrackN = new BitmapDataBarrackN(0, 0);
