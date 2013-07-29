@@ -11,6 +11,7 @@ import scenes.AScene;
 import scenes.FirstLevel;
 import scenes.SecondLevel;
 import scenes.ThirdLevel;
+import scenes.FourthLevel;
 import menu.Button;
 import Library;
 
@@ -63,6 +64,7 @@ class MainMenu extends AScene
         this._buttons.push(new Button(new Rectangle(512, 128, 100, 30), "Stage 1", "New : Grunt"));
         this._buttons.push(new Button(new Rectangle(640, 128, 100, 30), "Stage 2", "New : Psycho"));
         this._buttons.push(new Button(new Rectangle(768, 128, 100, 30), "Stage 3"));
+        this._buttons.push(new Button(new Rectangle(512, 240, 100, 30), "Stage 4"));
         for (b in this._buttons) {
             addChild(b);
         }
@@ -84,6 +86,10 @@ class MainMenu extends AScene
             var p : Point = new Point(mouse.x - x, mouse.y - y);
             if (true == this._buttons[2].rect.containsPoint(p)) {
                 return new ThirdLevel();
+            }
+            var p : Point = new Point(mouse.x - x, mouse.y - y);
+            if (true == this._buttons[3].rect.containsPoint(p)) {
+                return new FourthLevel();
             }
         }
         return this;

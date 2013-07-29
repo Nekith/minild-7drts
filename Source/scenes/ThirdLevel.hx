@@ -23,8 +23,8 @@ class ThirdLevel extends ALevel
         barrackOptions.push(Psycho);
         // forts
         var fortPlayer : Fort = new Fort(this, new Point(500, 1350), Owner.PLAYER);
-        var fortEnemy : Fort = new Fort(this, new Point(500, 50), Owner.ENEMY);
         var nodeFortPlayer : Node = new Node(this, new Point(500, 1285), fortPlayer);
+        var fortEnemy : Fort = new Fort(this, new Point(500, 50), Owner.ENEMY);
         var nodeFortEnemy : Node = new Node(this, new Point(500, 115), fortEnemy);
         fortPlayer.buildingOrder = nodeFortPlayer;
         fortEnemy.buildingOrder = nodeFortEnemy;

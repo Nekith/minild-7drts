@@ -28,6 +28,12 @@ class AssetData {
 			type.set ("assets/graphics/barrackn.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("assets/graphics/barrackr.png", nme.NME_assets_graphics_barrackr_png);
 			type.set ("assets/graphics/barrackr.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("assets/graphics/flagb.png", nme.NME_assets_graphics_flagb_png);
+			type.set ("assets/graphics/flagb.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("assets/graphics/flagn.png", nme.NME_assets_graphics_flagn_png);
+			type.set ("assets/graphics/flagn.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			className.set ("assets/graphics/flagr.png", nme.NME_assets_graphics_flagr_png);
+			type.set ("assets/graphics/flagr.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("assets/graphics/forta.png", nme.NME_assets_graphics_forta_png);
 			type.set ("assets/graphics/forta.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			className.set ("assets/graphics/fortb.png", nme.NME_assets_graphics_fortb_png);
@@ -69,6 +75,9 @@ class NME_assets_graphics_barracka_png extends flash.display.BitmapData { public
 class NME_assets_graphics_barrackb_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_graphics_barrackn_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_graphics_barrackr_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_graphics_flagb_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_graphics_flagn_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_graphics_flagr_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_graphics_forta_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_graphics_fortb_png extends flash.display.BitmapData { public function new () { super (0, 0); } }
 class NME_assets_graphics_fortr_png extends flash.display.BitmapData { public function new () { super (0, 0); } }

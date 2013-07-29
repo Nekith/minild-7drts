@@ -7,7 +7,6 @@
 -D nme_ver=4.0.2
 -D nme
 -D nme_install_tool=1
--D fdb
 -D web
 -swf-version 11
 -swf Export/flash/bin/Minild7drts.swf

@@ -124,6 +124,9 @@ class ALevel extends AScene
     {
         super.update();
         enemy();
+        if (true == keys[Keyboard.ESCAPE]) {
+            return new MainMenu();
+        }
         // camera
         if (true == keys[Keyboard.LEFT]) {
             x += 10;
